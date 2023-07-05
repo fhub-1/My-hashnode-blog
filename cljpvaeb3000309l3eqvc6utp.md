@@ -17,75 +17,47 @@ Creating a custom React hook library is a great way to encapsulate and share reu
 
 1. Create a new directory for your project. Open your terminal and run the following command:
     
-    ```bash
-    shell
-    ```
-    
 
 * ```bash
-    mkdir custom-hooks-library
+      mkdir custom-hooks-library
     ```
     
 * Navigate into the project directory:
     
-    ```bash
-    shell
-    ```
-    
 * ```bash
-    cd custom-hooks-library
+      cd custom-hooks-library
     ```
     
 * Initialize a new npm project:
     
-    ```bash
-    shell
-    ```
-    
 * ```bash
-    npm init -y
+      npm init -y
     ```
     
 * Next, create a `src` directory and a `hooks` subdirectory inside it:
     
-    ```bash
-    shell
-    ```
-    
 * ```bash
-    mkdir src
-    mkdir src/hooks
+      mkdir src
+      mkdir src/hooks
     ```
     
 * Move into the `src` directory:
     
-    ```bash
-    shell
-    ```
-    
 * ```bash
-    cd src
+      cd src
     ```
     
 * Create an empty `index.js` file:
     
-    ```bash
-    shell
-    ```
-    
 * ```bash
-    touch index.js
+      touch index.js
     ```
     
 * Open the `index.js` file and add the following line:
     
-    ```bash
-    javascript
-    ```
-    
 
 1. ```bash
-    export * from './hooks';
+     export * from './hooks';
     ```
     
 
@@ -93,37 +65,29 @@ Creating a custom React hook library is a great way to encapsulate and share reu
 
 1. Inside the `src/hooks` directory, create a new file for your first custom hook. For example, let's create a hook called `useLocalStorage`:
     
-    ```bash
-    shell
-    ```
-    
 
 * ```bash
-    touch useLocalStorage.js
+      touch useLocalStorage.js
     ```
     
 * Open the `useLocalStorage.js` file and define your custom hook. The `useLocalStorage` hook allows you to synchronize a value with the browser's local storage:
     
-    ```bash
-    javascript
-    ```
-    
 
-1. ```bash
-    import { useState, useEffect } from 'react';
-    
-    export function useLocalStorage(key, initialValue) {
-      const [value, setValue] = useState(() => {
-        const storedValue = localStorage.getItem(key);
-        return storedValue !== null ? JSON.parse(storedValue) : initialValue;
-      });
-    
-      useEffect(() => {
-        localStorage.setItem(key, JSON.stringify(value));
-      }, [key, value]);
-    
-      return [value, setValue];
-    }
+1. ```javascript
+     import { useState, useEffect } from 'react';
+     
+     export function useLocalStorage(key, initialValue) {
+       const [value, setValue] = useState(() => {
+         const storedValue = localStorage.getItem(key);
+         return storedValue !== null ? JSON.parse(storedValue) : initialValue;
+       });
+     
+       useEffect(() => {
+         localStorage.setItem(key, JSON.stringify(value));
+       }, [key, value]);
+     
+       return [value, setValue];
+     }
     ```
     
     This hook uses the `useState` hook to manage the state and the `useEffect` hook to synchronize the value with the local storage.
@@ -139,41 +103,41 @@ To test your custom hooks, you can create a sample React component that uses the
     
 
 * ```bash
-    mkdir components
+      mkdir components
     ```
     
 * Move into the `components` directory:
     
 * ```bash
-    cd components
+      cd components
     ```
     
 * Create a new file called `ExampleComponent.js`:
     
 * ```bash
-    touch ExampleComponent.js
+      touch ExampleComponent.js
     ```
     
 * Open the `ExampleComponent.js` file and add the following code:
     
 * ```javascript
-    import React from 'react';
-    import { useLocalStorage } from '../hooks';
-    
-    export function ExampleComponent() {
-      const [name, setName] = useLocalStorage('name', '');
-    
-      return (
-        <div>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <p>Hello, {name}!</p>
-        </div>
-      );
-    }
+      import React from 'react';
+      import { useLocalStorage } from '../hooks';
+      
+      export function ExampleComponent() {
+        const [name, setName] = useLocalStorage('name', '');
+      
+        return (
+          <div>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <p>Hello, {name}!</p>
+          </div>
+        );
+      }
     ```
     
     In this example, we import the `useLocalStorage` hook from our custom hook library and use it to manage a value stored in local storage.
@@ -181,40 +145,40 @@ To test your custom hooks, you can create a sample React component that uses the
 * Next, go back to the `src` directory:
     
 * ```bash
-    cd ..
+      cd ..
     ```
     
 * Open the `index.js` file and update it with the following code:
     
 * ```javascript
-    import React from 'react';
-    import ReactDOM from 'react-dom';
-    import { ExampleComponent } from './components';
-    
-    ReactDOM.render(
-      <React.StrictMode>
-        <ExampleComponent />
-      </React.StrictMode>,
-      document.getElementById('root')
-    );
+      import React from 'react';
+      import ReactDOM from 'react-dom';
+      import { ExampleComponent } from './components';
+      
+      ReactDOM.render(
+        <React.StrictMode>
+          <ExampleComponent />
+        </React.StrictMode>,
+        document.getElementById('root')
+      );
     ```
     
 * Finally, create an HTML file called `index.html` in the project root directory and add the following code:
     
 
 1. ```haml
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Custom Hooks Library</title>
-      </head>
-      <body>
-        <div id="root"></div>
-        <script src="./dist/bundle.js"></script>
-      </body>
-    </html>
+     <!DOCTYPE html>
+     <html lang="en">
+       <head>
+         <meta charset="UTF-8" />
+         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+         <title>Custom Hooks Library</title>
+       </head>
+       <body>
+         <div id="root"></div>
+         <script src="./dist/bundle.js"></script>
+       </body>
+     </html>
     ```
     
 
@@ -224,36 +188,36 @@ To test your custom hooks, you can create a sample React component that uses the
     
 
 * ```bash
-    npm install react react-dom
+      npm install react react-dom
     ```
     
 * Create a new file called `webpack.config.js` in the project root directory and add the following configuration:
     
 * ```javascript
-    const path = require('path');
-    
-    module.exports = {
-      mode: 'development',
-      entry: './src/index.js',
-      output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist'),
-      },
-      module: {
-        rules: [
-          {
-            test: /\.js$/,
-            exclude: /node_modules/,
-            use: {
-              loader: 'babel-loader',
-              options: {
-                presets: ['@babel/preset-react'],
+      const path = require('path');
+      
+      module.exports = {
+        mode: 'development',
+        entry: './src/index.js',
+        output: {
+          filename: 'bundle.js',
+          path: path.resolve(__dirname, 'dist'),
+        },
+        module: {
+          rules: [
+            {
+              test: /\.js$/,
+              exclude: /node_modules/,
+              use: {
+                loader: 'babel-loader',
+                options: {
+                  presets: ['@babel/preset-react'],
+                },
               },
             },
-          },
-        ],
-      },
-    };
+          ],
+        },
+      };
     ```
     
     This configuration sets up Webpack to bundle our React code and transpile it using Babel.
@@ -261,22 +225,22 @@ To test your custom hooks, you can create a sample React component that uses the
 * Install the required dev dependencies by running the following command in the project root directory:
     
 * ```bash
-    npm install --save-dev webpack webpack-cli babel-loader @babel/core @babel/preset-react
+      npm install --save-dev webpack webpack-cli babel-loader @babel/core @babel/preset-react
     ```
     
 * Add a build script to the `scripts` section of the `package.json` file:
     
 * ```bash
-    "scripts": {
-      "build": "webpack --config webpack.config.js"
-    }
+      "scripts": {
+        "build": "webpack --config webpack.config.js"
+      }
     ```
     
 * Run the build script to bundle your code:
     
 
 1. ```bash
-    npm run build
+     npm run build
     ```
     
 2. Open the `index.html` file in a web browser, and you should see your example component rendered with the custom hook.
